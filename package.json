@@ -1,0 +1,16 @@
+{
+  "name": "getUserMedia",
+  "version": "0.0.0",
+  "description": "A simple test of the funcionalities of getUserMedia",
+  "main": "app.js",
+  "devDependencies": {
+    "http-server": "^0.6.1",
+    "shelljs": "^0.2.6"
+    },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8000 -c-1"
+  },
+  "author": "mesmerismo",
+  "license": "ISC"
+}
