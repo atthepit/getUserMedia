@@ -1,25 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title></title>
+  <title>getUserStream by Example</title>
+  <style type="text/css">
+    img{
+      width: 320px;
+      height: 240px;
+    }
+  </style>
 </head>
 <body>
-  <video autoplay></video>
+  <video autoplay></video><br/>
+  <canvas style="display:none;" width="640" height="480"></canvas>
   <script type="text/javascript">
     navigator.getUserMedia  = navigator.getUserMedia ||
-                          navigator.webkitGetUserMedia ||
-                          navigator.mozGetUserMedia ||
-                          navigator.msGetUserMedia;
+                              navigator.webkitGetUserMedia ||
+                              navigator.mozGetUserMedia ||
+                              navigator.msGetUserMedia;
 
     var video = document.querySelector('video');
-    var errorCallback = function() {
-      alert('Aaaaaaaaaaaaand it\'s gone');
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
+    var localMediaStream = null;
+    
+    function snapshot() {
+      if (localMediaStream) {
+        ctx.drawImage(video, 0, 0);
+        var img = document.createElement('img');
+        img.src = canvas.toDataURL('image/webp');
+        document.querySelector('body').appendChild(img);
+      } else {
+
+      };
     }
+
+    video.addEventListener('click', snapshot, false);
 
     if (navigator.getUserMedia) {
       navigator.getUserMedia({audio: true, video: true}, function(stream) {
         video.src = window.URL.createObjectURL(stream);
-      }, errorCallback);
+        localMediaStream = stream;
+      }, function() {
+        alert('Aaaaaaaaaaaaand it\'s gone');
+      });
     } else {
       video.src = 'somevideo.webm'; // fallback.
     }

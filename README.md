@@ -8,4 +8,4 @@ npm start
 
 And access localhost:8000 from a browser.
 
-That's it! You can see your face now!
+That's it! You can see your face and take pictures of it now!
