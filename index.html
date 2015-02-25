@@ -2,50 +2,19 @@
 <html>
 <head>
   <title>getUserStream by Example</title>
-  <style type="text/css">
-    img{
-      width: 320px;
-      height: 240px;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="app.css">
 </head>
 <body>
-  <video autoplay></video><br/>
-  <canvas style="display:none;" width="640" height="480"></canvas>
+  <div style="position:relative;">
+    <video class="center" autoplay></video>
+    <button class="shot center">Take a picture!</button>
+    <canvas style="display:none;" width="640" height="480"></canvas>
+  </div>
+  <hr/>
+  <div id="snapshots" class="center"></div>
+  <script type="text/javascript" src="app.js"></script>
   <script type="text/javascript">
-    navigator.getUserMedia  = navigator.getUserMedia ||
-                              navigator.webkitGetUserMedia ||
-                              navigator.mozGetUserMedia ||
-                              navigator.msGetUserMedia;
-
-    var video = document.querySelector('video');
-    var canvas = document.querySelector('canvas');
-    var ctx = canvas.getContext('2d');
-    var localMediaStream = null;
-    
-    function snapshot() {
-      if (localMediaStream) {
-        ctx.drawImage(video, 0, 0);
-        var img = document.createElement('img');
-        img.src = canvas.toDataURL('image/webp');
-        document.querySelector('body').appendChild(img);
-      } else {
-
-      };
-    }
-
-    video.addEventListener('click', snapshot, false);
-
-    if (navigator.getUserMedia) {
-      navigator.getUserMedia({audio: true, video: true}, function(stream) {
-        video.src = window.URL.createObjectURL(stream);
-        localMediaStream = stream;
-      }, function() {
-        alert('Aaaaaaaaaaaaand it\'s gone');
-      });
-    } else {
-      video.src = 'somevideo.webm'; // fallback.
-    }
+    app();
   </script>
 </body>
 </html>
