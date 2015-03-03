@@ -13,9 +13,13 @@ var app = function () {
   function snapshot() {
     if (localMediaStream) {
       ctx.drawImage(video, 0, 0);
+      var link = document.createElement('a');
+      link.setAttribute('target', '_blank');
       var img = document.createElement('img');
       img.src = canvas.toDataURL('image/webp');
-      snapshots.appendChild(img);
+      link.setAttribute('href', img.src);
+      link.appendChild(img);
+      snapshots.appendChild(link);
     };
   }
 
