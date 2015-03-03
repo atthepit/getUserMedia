@@ -22,7 +22,7 @@ var app = function () {
   document.querySelector('button').addEventListener('click', snapshot, false);
 
   if (navigator.getUserMedia) {
-    navigator.getUserMedia({audio: true, video: true}, function(stream) {
+    navigator.getUserMedia({video: true}, function(stream) {
       video.src = window.URL.createObjectURL(stream);
       localMediaStream = stream;
     }, function() {
